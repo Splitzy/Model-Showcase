@@ -5,30 +5,20 @@ using UnityEngine;
 public class DoorOpen : MonoBehaviour {
 
     Animator anim;
-    public Animation clip;
-    public Animation clip2;
+    public GameObject OpenPanel;
 
     // Use this for initialization
     void Start ()
     {
         anim = GetComponent<Animator>();
-        clip["Door_01"].wrapMode = WrapMode.ClampForever;
-        clip2["Door_02"].wrapMode = WrapMode.ClampForever;
+        OpenPanel.SetActive(false);
 	}
 
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            anim.SetBool("isOpen", true);
-        }
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if(other.tag =="Player")
-        {
-            anim.SetBool("isOpen", true);
+            OpenPanel.SetActive(true);
         }
     }
 
@@ -37,6 +27,27 @@ public class DoorOpen : MonoBehaviour {
         if(other.tag == "Player")
         {
             anim.SetBool("isOpen", false);
+            OpenPanel.SetActive(false);
+        }
+    }
+
+    private bool isOpenPanelActive
+    {
+        get
+        {
+            return OpenPanel.activeInHierarchy;
+        }
+    }
+
+    void Update()
+    {
+        if(isOpenPanelActive)
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                OpenPanel.SetActive(false);
+                anim.SetBool("isOpen", true);
+            }
         }
     }
 }
