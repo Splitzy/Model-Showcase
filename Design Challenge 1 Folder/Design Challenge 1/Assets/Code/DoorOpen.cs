@@ -5,34 +5,38 @@ using UnityEngine;
 public class DoorOpen : MonoBehaviour {
 
     Animator anim;
-    public bool doorOpen = false;
+    public Animation clip;
+    public Animation clip2;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         anim = GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		if (Input.GetKeyDown("e"))
-        {
-            OpenDoor();
-        }
+        clip["Door_01"].wrapMode = WrapMode.ClampForever;
+        clip2["Door_02"].wrapMode = WrapMode.ClampForever;
 	}
 
-    void OpenDoor()
+    void OnTriggerEnter(Collider other)
     {
-        if (doorOpen == true)
+        if(other.tag == "Player")
         {
-            //anim.Play();
-            doorOpen = false;
+            anim.SetBool("isOpen", true);
         }
-        else
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if(other.tag =="Player")
         {
-            //anim.Play();
-            doorOpen = true;
+            anim.SetBool("isOpen", true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            anim.SetBool("isOpen", false);
         }
     }
 }
