@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FPSCamera : MonoBehaviour {
+public class FPSCamera : MonoBehaviour
+{
 
     Vector2 mouseLook;
     Vector2 smoothV;

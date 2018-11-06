@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class characterController : MonoBehaviour {
+public class characterController : MonoBehaviour
+{
 
     public float speed = 10.0f;
+    bool isLocked = true;
 
 	// Use this for initialization
 	void Start()
@@ -22,9 +24,15 @@ public class characterController : MonoBehaviour {
 
         transform.Translate(strafe, 0, translation);
 
-        if (Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown("escape") && isLocked == true)
         {
-                Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.None;
+            isLocked = false;
+        }
+
+        if (Input.GetKeyDown("escape") && isLocked == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
 	}
 }

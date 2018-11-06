@@ -2,26 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Footsteps : MonoBehaviour {
+public class Footsteps : MonoBehaviour
+{
+    public AudioSource step;
 
-    CharacterController cc;
-    AudioSource audio;
 
-	// Use this for initialization
-	void Start()
+    void Update()
     {
-        cc = GetComponent<CharacterController>();
-        audio = GetComponent<AudioSource>();
-	}
-	
-	// Update is called once per frame
-	void Update()
-    {
-		if(cc.isGrounded == true && cc.velocity.magnitude > 2f && audio.isPlaying == false)
+        if(Input.GetAxis("Vertical") > 0 && !step.isPlaying)
         {
-            audio.volume = Random.Range(0.8f, 1f);
-
-            //audio.play();
+            step.volume = Random.Range(0.8f, 1f);
+            step.pitch = Random.Range(0.7f, 1f);
+            step.Play();
         }
-	}
+    }
+
 }

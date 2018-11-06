@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorOpen : MonoBehaviour {
+public class DoorOpen : MonoBehaviour
+{
 
     Animator anim;
     public GameObject OpenPanel;
+    public AudioSource sound;
 
     // Use this for initialization
     void Start ()
@@ -45,6 +47,7 @@ public class DoorOpen : MonoBehaviour {
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
+                sound.Play();
                 OpenPanel.SetActive(false);
                 anim.SetBool("isOpen", true);
             }
