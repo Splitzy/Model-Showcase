@@ -33,6 +33,7 @@ public class characterController : MonoBehaviour
         if (Input.GetKeyDown("escape") && isLocked == false)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            isLocked = true;
         }
 	}
 }
